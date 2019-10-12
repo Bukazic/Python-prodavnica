@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home page</title>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li>
+                <a href="/home">Home</a>
+            </li>
+            {% if user.type != 'admin' %}
+            <li>
+                <a href="/myprofile">My Profile</a>
+            </li>
+            {% endif %}
+            {% if user.type == 'admin' %}
+            <li>
+                <a href='/all-items'>All users</a>
+            </li>
+            {% endif %}
+            <li>
+                <a href="/all-items">All Items</a>
+            </li>
+            <li>
+                <a href="/all-sellers">All Sellers</a>
+            </li>
+            <li>
+                <a href="/logout">Log Out</a>
+            </li>
+        </ul>   
+        {% if '_id' not in session %}
+        <div>
+            <input type="button" href="/login" value="Login">
+            <input type="button" href="/register" value="Register">
+        </div>
+        {% endif %}
+        Trenutni korisnik: {{ user.username }}
+        <br>
+        {% if type %}
+            Vi ste: {{type}}
+        {% endif %}
+        <br>
+        {% if user.type == 'kupac' %}
+            Stanje racuna: {{ user.funds }}v$
+        {% endif %}
+    </nav>
+    <hr>
+    <h2>Most Popular Products</h2>
+    {% for item in items %}
+		<li> <a href = "/items/{{item['_id']}}"> {{item['name']}} </a> </li>
+	{% endfor %}
+</body>
+
+</html>

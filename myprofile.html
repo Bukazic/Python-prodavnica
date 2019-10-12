@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Profile</title>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li>
+                <a href="/home">Home</a>
+            </li>
+            {% if user.type != 'admin' %}
+            <li>
+                <a href="/myprofile">My Profile</a>
+            </li>
+            {% endif %}
+            <li>
+                <a href="/all-items">All Items</a>
+            </li>
+            <li>
+                <a href="/all-sellers">All Sellers</a>
+            </li>
+            <li>
+                <a href="/logout">Log Out</a>
+            </li>
+        </ul>
+    </nav>
+    Korisnik: {{user.username }} </br>
+    Ime: {{ user.name }} <br>
+    Prezime: {{ user.last_name }} <br>
+    {% if user.type == 'prodavac' %}
+    Kompanija: {{ user.company }} <br>
+    {% endif %}
+    {% if user.type == 'kupac' %}
+    Raspoloziv novac: {{ user.funds }}v$
+    <br>
+    <hr>
+    Dodajte sredstva
+        <form action = '/add-funds' method="POST">
+            Vrednost: <input type="number" name="funds">v$
+            <br>
+            <input type="submit" value="Add Funds!"><br>
+        </form>
+    {% endif %}
+	
+	{% if items %}
+	<ol>
+	{% for item in items %}
+	<li> 
+        <a href = "/items/{{item['_id']}}">
+            {{item['name']}} 
+        </a>
+    </li>
+	{% endfor %}
+	</ol>
+	{% endif %}
+	{% if user.type == 'prodavac' %}
+		
+		</br>
+		</br>
+		</br>
+		
+		Novi item: </br>
+		<form action = '/add-item' method = 'POST'> 
+			Naziv: <input type = 'text' name = 'name' /> </br>
+			Opis: <input type = 'text' name = 'desc' /> </br>
+			Cena: <input type = 'number' name = 'price' /></br>
+			Kolicina: <input type = 'number' name = 'qtt' /> </br>
+			<input type = 'submit' value = 'Add item!' /> </br>
+		
+		</form>
+	
+		{% endif %}
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>All Items</title>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li>
+                <a href="/home">Home</a>
+            </li>
+            <li>
+                <a href="/myprofile">My Profile</a>
+            </li>
+            <li>
+                <a href="/all-items">All Items</a>
+            </li>
+            <li>
+                <a href="/all-sellers">All Sellers</a>
+            </li>
+            <li>
+                <a href="/logout">Log Out</a>
+            </li>
+        </ul>
+    </nav>
+    <hr>
+    <h2>Svi proizvodi</h2>
+		<ul>
+		{% for item in items %}
+			<li> <a href = "/items/{{item['_id']}}"> {{ item.name }} </a> </li>
+		{% endfor %}
+		</ul>
+</body>
+
+</html>

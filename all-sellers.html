@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>All Sellers</title>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li>
+                <a href="/home">Home</a>
+            </li>
+            <li>
+                <a href="/myprofile">My Profile</a>
+            </li>
+            <li>
+                <a href="/all-items">All Items</a>
+            </li>
+            <li>
+                <a href="/all-sellers">All Sellers</a>
+            </li>
+            <li>
+                <a href="/logout">Log Out</a>
+            </li>
+        </ul>
+    </nav>
+    <hr>
+    <h3>Prodavci</h3>
+    {% for seller in sellers %}
+    <a href="/sellers/{{seller['_id']}}"> {{seller['username']}} </a> </br>
+    {% endfor %}
+</body>
+
+</html>

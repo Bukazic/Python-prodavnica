@@ -1,0 +1,35 @@
+<html>
+
+<head>
+    <title> Register Page </title>
+</head>
+
+<body>
+    <form action='/register' method='POST'>
+        <label>Ime: </label><input name='ime' type='text' required /> <br>
+        <label>Prezime: </label><input name="lastname" type="text" required> <br>
+        <label>Username: </label><input name="username" type="text" required> <br>
+        <label>Password: </label><input name='password' type='password' required /> <br>
+        <label>Br. kartice: </label><input name="kartica" type="text" required> <br>
+        <label>Adresa: </label><input name="adresa" type="text" required> <br>
+        <select name='type'>
+			<option value = 'kupac'> Kupac </option>
+			<option value = 'prodavac'> Prodavac </option>
+		</select> <br>
+        <label>Kompanija: </label><input type="text" name="kompanija"> <br>
+
+        <input value='Register' type='submit' required />
+    </form>
+    {% with messages = get_flashed_messages() %}
+  		{% if messages %}
+    		<ul>
+    		{% for message in messages %}
+      			<li>{{ message }}</li>
+    		{% endfor %}
+    		</ul>
+  		{% endif %}
+	{% endwith %}
+	<a href="index"><button>Back</button></a>
+</body>
+
+</html>

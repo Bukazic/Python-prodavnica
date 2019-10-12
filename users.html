@@ -1,0 +1,16 @@
+<html>
+	<head>
+		<title> Sellers Page </title>
+	</head>
+	<body>
+		{% for user in users %}
+		{{user['name']}} 
+		<form action = '/delete-user' method = 'POST'>
+			<input type = 'text' value = '{{user["_id"]}}' name = 'user_id' hidden />
+			<input type = 'submit' value = 'Obrisi korisnika' />
+		</form>
+		<br>
+		{% endfor %}
+
+	</body>
+</html>

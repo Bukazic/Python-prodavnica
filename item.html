@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<title> Item Page </title>
+	</head>
+	<body>
+		<h3> {{item['name']}} </h3>
+		<h5>Seller: <a href = '/sellers/{{item["seller_id"]}}'> {{item["seller_name"]}} </a> </h5>
+		<p>Description: {{item['desc']}} </p>
+		<small> <i> Price: {{item['price']}}</i> <b> {{item['currency']}} </b> </small>
+		<h1> Na lageru je ostalo: {{item['qtt']}} </h1>
+		<small> <i> Visits: {{item['visits']}}</i> </small>
+		<small> Likes: {{lajkovi}} </small> </br>
+		<p> Liked by: {{lista_korisnika}} </p>
+		
+		<form action = '/lajk' method = 'POST'>
+		<input type = 'text' value = '{{item["_id"]}}' name = 'item_id' hidden />
+		<input type = 'submit' value = 'Like!' />
+		</form>
+		
+		<form action = '/buy' method = 'POST'>
+		<input type = 'text' value = '{{item["_id"]}}' name = 'item_id' hidden />
+		<input type="number" name="kolicina">
+		<input type = 'submit' value = 'Buy' />
+		</form>
+		{% if user.type == 'admin' or user.type == 'prodavac' %}
+		<form action = '/items/{{item["_id"]}}' method='POST'>
+		<input type = "submit" value="Delete item">
+		</form>
+		{% endif %}
+		<hr>
+		<h2>Komentari</h2>
+		{% for comment in all_comments %}
+		<ul>
+			<li> {{ comment.mail }} </li>
+			<li> {{ comment.content }} </li>
+			<li> {{ comment.time }} </li>
+		</ul>
+		{% endfor %}
+		<hr>
+		<h2>Dodaj komentar</h2>
+		<form action='/add-comment/{{item["_id"]}}' method = 'POST'>
+		Mail: <input type="text" name="mail">
+		<br>
+		Sadrzaj: <textarea rows="4" cols="50" name="content"></textarea>
+		<br>
+		<input type="submit" value="Add comment">
+		
+	</body>
+</html>
